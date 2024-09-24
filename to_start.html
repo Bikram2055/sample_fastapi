@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Competition Coming Soon</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .message-card {
+            background-color: #ffffff;
+            padding: 30px 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 500px;
+        }
+        .message-card h2 {
+            color: #f39c12;
+            margin-bottom: 15px;
+        }
+        .message-card p {
+            color: #333;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        .message-card a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #7289da;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .message-card a:hover {
+            background-color: #5b6eae;
+        }
+        .countdown {
+            font-size: 24px;
+            font-weight: bold;
+            color: #f39c12;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="message-card">
+        <h2>Competition Coming Soon</h2>
+        <p>The competition is not yet open, but it's just around the corner! The countdown has begun:</p>
+        <div class="countdown" id="countdown-timer"></div>
+        <a href="https://discord.com/channels/1278637443842576417/1278637444454940740" target="_blank">Join Our Discord</a>
+    </div>
+
+    <script>
+        // Asynchronous function to fetch the competition start time
+        async function getStartTime() {
+            let response = await fetch('/start-time');
+            let data = await response.json();
+            let start_time = String(data.start_time);
+            console.log("Start time:", start_time); // To confirm the fetched start time
+            return start_time;
+        }
+    
+        // Function to start the countdown
+        async function startCountdown() {
+            const start_time = await getStartTime();  // Wait for the start time to be fetched
+            var countDownDate = new Date(start_time).getTime();
+            console.log("Countdown Date:", countDownDate);
+    
+            // Update the countdown every 1 second
+            var countdownFunction = setInterval(function () {
+                // Get the current time
+                var now = new Date().getTime();
+    
+                // Find the distance between now and the countdown date
+                var distance = countDownDate - now;
+    
+                // Time calculations for days, hours, minutes, and seconds
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    
+                // Display the result in the countdown timer element
+                document.getElementById("countdown-timer").innerHTML = days + "d " + hours + "h " +
+                    minutes + "m " + seconds + "s ";
+    
+                // If the countdown is finished, display a message
+                if (distance < 0) {
+                    clearInterval(countdownFunction);
+                    document.getElementById("countdown-timer").innerHTML = "The competition has started!";
+                }
+            }, 1000);
+        }
+    
+        // Start the countdown when the page loads
+        startCountdown();
+    </script>
+    
+</body>
+</html>

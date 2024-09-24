@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Multiple Files</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .form-container {
+            background-color: #fff;
+            padding: 20px 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+        .form-container h1 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="file"] {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Upload Your Project</h1>
+        <form action="/success" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" placeholder="98xxxxxxxx" pattern="[0-9]{10}" required>
+            </div>
+            <div class="form-group">
+                <label for="discord">Discord ID:</label>
+                <input type="text" id="discord" name="discord" placeholder="Enter your discord id">
+            </div>
+            <div class="form-group">
+                <label for="project-file">Project Zip File:</label>
+                <input type="file" id="project-file" name="project_file" accept=".zip,.rar,.7zip" required>
+            </div>
+            <div class="form-group">
+                <label for="build-file">Build Zip File:</label>
+                <input type="file" id="build-file" name="build_file" accept=".zip,.rar,.7zip" required>
+            </div>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</body>
+</html>
